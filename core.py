@@ -15,34 +15,34 @@ if os.path.exists("env.py"):
 pinecone.init(api_key=os.environ.get("PINECONE_SECRET_KEY"),
               environment=os.environ.get("PINECONE_ENVIRONMENT_REGION")
               )
-def initialize_session_state():
-    if "history" not in st.session_state:
-        st.session_state.history = []
+# def initialize_session_state():
+#     if "history" not in st.session_state:
+#         st.session_state.history = []
 
-def on_click_callback():
-    human_prompt = st.session_state.human_prompt
-    st.session_state.history.append(human_prompt)
+# def on_click_callback():
+#     human_prompt = st.session_state.human_prompt
+#     st.session_state.history.append(human_prompt)
 
-initialize_session_state()
+# initialize_session_state()
 
-st.title("LangChain Climate Co-Pilot")
+# st.title("LangChain Climate Co-Pilot")
 
-chat_placeholder = st.container()
-prompt_placeholder = st.form("chat-form")
+# chat_placeholder = st.container()
+# prompt_placeholder = st.form("chat-form")
 
-with chat_placeholder:
-    for chat in st.session_state.history:
-        st.markdown(chat)
+# with chat_placeholder:
+#     for chat in st.session_state.history:
+#         st.markdown(chat)
 
-with prompt_placeholder:
-    st.markdown("Lets Chat!")
-    cols = st.columns((6, 1))
-    cols[0].text_input(
-        "Chat", value = "Hi", label_visibility="collapsed", key="human_prompt"
-    )
-    cols[1].form_submit_button(
-        "Submit", type="primary", on_click=on_click_callback
-    )
+# with prompt_placeholder:
+#     st.markdown("Lets Chat!")
+#     cols = st.columns((6, 1))
+#     cols[0].text_input(
+#         "Chat", value = "Hi", label_visibility="collapsed", key="human_prompt"
+#     )
+#     cols[1].form_submit_button(
+#         "Submit", type="primary", on_click=on_click_callback
+#     )
 
 def run_llm():
     embeddings = OpenAIEmbeddings()
@@ -70,4 +70,9 @@ def run_llm():
         response = qa({"question": query, "chat_history": chat_history})
         print(f"Response: {response.get('answer')}")
         chat_history.append((query, str(response)))
+
+        print(chat_history)
+        while len(chat_history) > 4:
+            chat_history = []
+
     #return qa({"query": query})
