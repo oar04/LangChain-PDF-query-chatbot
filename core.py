@@ -39,10 +39,14 @@ def run_llm():
         query = input("You: ")
         if query == "quit":
             break
-        response = qa({"question": query, "chat_history": chat_history})
-        print(f"Response: {response.get('answer')}")
-        chat_history.append((query, str(response)))
+        elif query == "":
+            print("please ask a valid question")
+        else:
 
-        while len(chat_history)>4:
-            chat_history = []
+            response = qa({"question": query, "chat_history": chat_history})
+            print(f"Response: {response.get('answer')}")
+            chat_history.append((query, str(response)))
+
+            while len(chat_history)>4:
+                chat_history = []
     #return qa({"query": query})
