@@ -29,10 +29,12 @@ pip install openai tiktoken pinecone-client langchain
 4. **Configure your OpenAI API key.**
    You can obtain your API key by signing up for OpenAI at https://openai.com/product.
 
-5. **Run the script to process the PDFs and store them in Pinecone:**
+5. **Add the keys and other relavent details into env.py**
+
+6. **Run the script to process the PDFs and store them in Pinecone:**
    python injest_text.py
 
-6. **Run the script to start the chat:**
+7. **Run the script to start the chat:**
    python main.py
 
 The chatbot will prompt you for commands and respond to your queries based on the content of the processed PDFs.
